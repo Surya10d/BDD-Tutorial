@@ -1,12 +1,13 @@
 package test_basic;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class MapTest {
 
 	public static void main(String[] args) {
-		HashMap<String,String> numbers = new HashMap<String,String>();
+		Map<String,String> numbers = new HashMap<String,String>();
 		numbers.put("1","one");
 		numbers.put("2", "two");
 		numbers.put("3", "three");

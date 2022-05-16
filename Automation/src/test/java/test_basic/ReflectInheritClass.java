@@ -1,5 +1,9 @@
 package test_basic;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 import test_basic.ReflectChildclass;
 import test_basic.ReflectClass;
 
@@ -60,7 +64,7 @@ public class ReflectInheritClass extends ReflectChildclass implements ReflectCla
 			e.printStackTrace();
 		}
 		//		Get canonical name is used to get the class name
-		System.out.println(reflectInheritClass.getCanonicalName()); // prints com.journaldev.reflection.ConcreteClass
+		System.out.println(reflectInheritClass.getCanonicalName()); // prints com.journaldev.reflection.ReflectInheritclass
 
 		//for primitive types, wrapper classes and arrays
 		Class<?> booleanClass = boolean.class;
@@ -77,9 +81,15 @@ public class ReflectInheritClass extends ReflectChildclass implements ReflectCla
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		Class<?> twoDStringArray = String[][].class;
 		System.out.println(twoDStringArray.getCanonicalName());
+		System.out.println("Geting super class objects");
+		Class<?> superclass =  reflectInheritClass.getSuperclass();
+		System.out.println(superclass);
+		System.out.println(Object.class.getSuperclass());
+		System.out.println(String[][].class.getSuperclass());
+		System.out.println("Getting public members classes");
+		Class[] classes = reflectInheritClass.getClasses();
 		
 		
 	}
