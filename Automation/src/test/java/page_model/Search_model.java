@@ -12,21 +12,38 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.*;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import page_objects.Search_objects;
 
 public class Search_model {
-	static WebDriver driver;
+	private WebDriver driver;
 	
-	public static WebDriver initialise() {
+	public Search_model() {
+		this.driver = initialise(driver);
+	    PageFactory.initElements(driver, this);	    
+	}
+	
+	@FindBy(how=How.CSS, using = "input[name='q']")
+	private WebElement search_bar_input;
+	
+	@FindBy(how=How.CSS, using = "input[name='btnK']")
+	private WebElement search_bar_btn;
+	
+	@FindBy(how=How.XPATH, using = "//a[@href='https://www.python.org/']")
+	private WebElement python_link;
+	
+	@FindBy(how=How.CSS, using = "a[title='The Python Programming Language']")
+	private WebElement python_name_check;
+	
+	public WebDriver initialise(WebDriver driver) {
 		WebDriverManager.chromedriver().setup();
     	ChromeOptions chromeOptions = new ChromeOptions();
     	driver = new ChromeDriver(chromeOptions);
     	driver.manage().window().maximize();
     	Properties property = new Properties();
 		try {
-			BufferedReader br = new BufferedReader(new FileReader("properties//propertyFilePath"));
+			BufferedReader br = new BufferedReader(new FileReader("src//test//java//properties//propertyFile.properties"));
 			property.load(br);
 			br.close();
 		} catch (FileNotFoundException e) {
@@ -41,68 +58,29 @@ public class Search_model {
     	return driver;
 	}
 	
-	public static void get(String url) {
+	public void killDriver() {
+		driver.quit();
+	}
+	
+	public void get(String url) {
 		driver.get(url);
 	}
-	
-	public static WebElement byCss(String ele){
-		WebElement element = driver.findElement(By.cssSelector(ele));
-		return element;
+
+	public void i_type_something_in_search_bar(String strArg1) {
+		search_bar_input.sendKeys(strArg1);
 	}
 	
-	public static WebElement byXpath(String ele){
-		WebElement element = driver.findElement(By.xpath(ele));
-		return element;
+	public void i_click_on_search_bar_button() {
+		search_bar_btn.click();
 	}
 	
-	public static WebElement byId(String ele){
-		WebElement element = driver.findElement(By.id(ele));
-		return element;
-	}
-	
-	public static WebElement byLinkText(String ele){
-		WebElement element = driver.findElement(By.linkText(ele));
-		return element;
-	}
-	
-	public static WebElement byPartialLinkText(String ele){
-		WebElement element = driver.findElement(By.partialLinkText(ele));
-		return element;
-	}
-	
-	public static WebElement byName(String ele){
-		WebElement element = driver.findElement(By.name(ele));
-		return element;
-	}
-	
-	public static WebElement byTagName(String ele){
-		WebElement element = driver.findElement(By.tagName(ele));
-		return element;
-	}
-	
-	public static WebElement byClassName(String ele){
-		WebElement element = driver.findElement(By.className(ele));
-		return element;
-	}
-	
-	public static void i_type_something_in_search_bar(String strArg1) {
-		WebElement Elem = Search_model.byCss(Search_objects.search_bar_input);
-    	Elem.sendKeys(strArg1);
-	}
-	
-	public static void i_click_on_search_bar_button() {
-		WebElement Elem = Search_model.byCss(Search_objects.search_bar_btn);
-    	Elem.click();
-	}
-	
-	public static void i_click_on_the_python_link() {
-    	WebElement Elem = Search_model.byXpath(Search_objects.python_link);
-    	Elem.click();
+	public void i_click_on_the_python_link() {
+    	python_link.click();
     }
 	
-	public static void python_page_must_appear(String assertionCheck) {
-    	WebElement Elem = Search_model.byCss(Search_objects.python_name_check);
-    	String asserttext = Elem.getText();
+	public void python_page_must_appear(String assertionCheck) {
+		String asserttext = python_name_check.getText();
     	assert assertionCheck.equals(asserttext);
     }
+	
 }
