@@ -1,4 +1,4 @@
-package stepdefinition;
+package stepDefinitionUI;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.After;

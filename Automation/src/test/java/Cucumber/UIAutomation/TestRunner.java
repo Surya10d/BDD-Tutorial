@@ -1,4 +1,4 @@
-package cucumberOptions;
+package Cucumber.UIAutomation;
 
 import org.junit.runner.RunWith;
 
@@ -23,7 +23,7 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		features="src/test/java/features/search.feature",
-		glue="stepdefinition",
+		glue="stepDefinitionUI",
 		tags = {"@OnlyScenarioTest, @ScenarioOutlineTest"},
 		monochrome= true,
 		format= {"pretty"}
