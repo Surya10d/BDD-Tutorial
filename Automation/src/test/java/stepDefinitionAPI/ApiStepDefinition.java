@@ -17,7 +17,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class ApiStepDefinition {
-	OkHttpClient client;
+	OkHttpClient client;     
 	Request request;
 	Response httpresponse;
 	String response_content;
@@ -74,7 +74,6 @@ public class ApiStepDefinition {
 				.url(url)
 				.addHeader("Content-Type", "application/json")
 				.method(method,body)
-				.addHeader("Content-Type", "application/json")
 				.build();
 		}
 
@@ -99,7 +98,6 @@ public class ApiStepDefinition {
 				.url(url)
 				.addHeader("Content-Type", "application/json")
 				.method(method,body)
-				.addHeader("Content-Type", "application/json")
 				.build();
 	}
 	
@@ -124,7 +122,6 @@ public class ApiStepDefinition {
 				.url(url)
 				.addHeader("Content-Type", "application/json")
 				.method(method,body)
-				.addHeader("Content-Type", "application/json")
 				.build();
 	}
 	
@@ -140,7 +137,6 @@ public class ApiStepDefinition {
 				.url(url)
 				.addHeader("Content-Type", "application/json")
 				.method(method, null)
-				.addHeader("Content-Type", "application/json")
 				.build();
 		List<Object> resp = execute_request();
 		assert (Integer)resp.get(0) == 204;
