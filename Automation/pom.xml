@@ -27,6 +27,20 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
      <scope>test</scope> 
 </dependency>  
 
+	<!-- okhttp3 is used as client for sending request and getting response -->
+	<dependency>
+	    <groupId>com.squareup.okhttp3</groupId>
+	    <artifactId>okhttp</artifactId>
+	    <version>4.9.1</version>
+	</dependency>
+
+		<!-- Org.json used to convert Map to JSON object -->
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20140107</version>
+		</dependency>
+
 	  <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 	<dependency>
 	    <groupId>org.seleniumhq.selenium</groupId>
@@ -35,11 +49,11 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 	</dependency>
 	
 	<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
-	<dependency>
+<!-- 	<dependency>
 	    <groupId>org.apache.httpcomponents</groupId>
 	    <artifactId>httpclient</artifactId>
 	    <version>4.5.13</version>
-	</dependency>
+	</dependency>  -->
 
 	  <dependency>
 	<groupId>io.github.bonigarcia</groupId>
