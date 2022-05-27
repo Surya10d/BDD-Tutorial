@@ -63,3 +63,11 @@ Feature: Api automation practice
 		Given Load all the preconditions
 		When I hit the DELETE api endpoint "https://reqres.in/api/users/680"
 		Then User should be deleted
+		
+	# POST - To send image file upload
+	@POST	@file_upload	@E2ERun
+	Scenario: Hit file upload endpoint by POST method
+		Given Load all the preconditions
+		When I hit the file upload api endpoint "http://127.0.0.1:5000/"
+		And I upload the file
+		Then File uploaded message should appear

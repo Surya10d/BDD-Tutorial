@@ -1,5 +1,6 @@
 package stepDefinitionAPI;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,6 +12,7 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.*;
 
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -121,7 +123,7 @@ public class ApiStepDefinition {
 		request = new Request.Builder()
 				.url(url)
 				.addHeader("Content-Type", "application/json")
-				.method(method,body)
+				.method(method, body)
 				.build();
 	}
 	
@@ -140,5 +142,34 @@ public class ApiStepDefinition {
 				.build();
 		List<Object> resp = execute_request();
 		assert (Integer)resp.get(0) == 204;
+	}
+	
+	@When("^I hit the file upload api endpoint \"([^\"]*)\"$")
+	public void i_hit_the_file_upload_api_endpoint(String url) {
+		this.url = url;
+		method = "POST";
+	}
+	
+	@And("^I upload the file$")
+	public void i_upload_the_file() {
+		mediaType = MediaType.parse("text/plain");
+	    RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+	      .addFormDataPart("file","Screenshot from 2022-05-05 15-15-54.png",
+	    		  RequestBody.create(new File("Sample_image.png"),
+	    				  (MediaType.parse("application/octet-stream")
+	    				  )))
+	      .build();
+		request = new Request.Builder()
+				.url(url)
+				.method(method, body)
+				.build();
+		
+	}
+	
+	@Then("^File uploaded message should appear$")
+	public void file_uploaded_message_should_appear() throws IOException {
+		List<Object> resp = execute_request();
+		assert (Integer)resp.get(0) == 200;
+		assert resp.get(1).toString() == "File uploaded successfully";		
 	}
 }
